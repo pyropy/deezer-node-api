@@ -10,6 +10,28 @@ describe('Load module', function() {
     });
 });
 
+describe('Track', function() {
+    it('Get track by ISRC', function(done) {
+        dz.getTrackByISRC('USRC11801773').then(function(track) {
+            test
+                .object(track)
+                        .hasProperty('id')
+                        .hasProperty('readable')
+                        .hasProperty('isrc', 'USRC11801773')
+                        .hasProperty('title')
+                        .hasProperty('title_short')
+                        .hasProperty('title_version')
+                        .hasProperty('link')
+                        .hasProperty('duration')
+                        .hasProperty('rank')
+                        .hasProperty('explicit_lyrics')
+                        .hasProperty('preview')
+                        .hasProperty('artist')
+                        .hasProperty('album');
+        }).finally(done);
+    })
+})
+
 describe('Album', function() {
     it('Get album', function(done) {
         dz.getAlbum(302127).then(function(album) {
@@ -18,6 +40,47 @@ describe('Album', function() {
                     .hasProperty('id', 302127)
                     .hasProperty('title')
                     .hasProperty('upc')
+                    .hasProperty('link')
+                    .hasProperty('share')
+                    .hasProperty('cover')
+                    .hasProperty('cover_small')
+                    .hasProperty('cover_medium')
+                    .hasProperty('cover_big')
+                    .hasProperty('cover_xl')
+                    .hasProperty('genre_id')
+                    .hasProperty('genres')
+                    .hasProperty('label')
+                    .hasProperty('nb_tracks')
+                    .hasProperty('duration')
+                    .hasProperty('fans')
+                    .hasProperty('rating')
+                    .hasProperty('release_date')
+                    .hasProperty('record_type')
+                    .hasProperty('available')
+                    .hasProperty('tracklist')
+                    .hasProperty('explicit_lyrics')
+                    .hasProperty('contributors')
+                    .hasProperty('artist')
+                    .hasProperty('tracks');
+            test
+                .object(album.genres)
+                    .hasProperty('data');
+            test.object(album.contributors);
+            test.object(album.artist);
+            test
+                .object(album.tracks)
+                    .hasProperty('data');
+
+        }).finally(done);
+    });
+
+    it('Get album by UPC', function(done) {
+        dz.getAlbumByUPC("724384960650").then(function(album) {
+            test
+                .object(album)
+                    .hasProperty('id', 302127)
+                    .hasProperty('title')
+                    .hasProperty('upc', "724384960650")
                     .hasProperty('link')
                     .hasProperty('share')
                     .hasProperty('cover')

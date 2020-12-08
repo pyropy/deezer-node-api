@@ -51,4 +51,16 @@ Deezer.prototype.findArtists = function(query, index) {
     return rp({url: this.apiUrl + url, json:true});
 };
 
+
+Deezer.prototype.getAlbumByUPC = function(upc) {
+    var url = 'album/upc:' + upc;
+    return rp({url: this.apiUrl + url, json:true});
+}
+
+
+Deezer.prototype.getTrackByISRC = function(isrc) {
+    var url = 'track/isrc:' + isrc;
+    return rp({url: this.apiUrl + url, json:true});
+}
+
 module.exports = Deezer;
